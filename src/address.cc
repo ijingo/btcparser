@@ -8,7 +8,7 @@
 #include "SHA256.h"
 #include "RIPEMD160.h"
 
-bool PublicKeyToAddress(const uint8_t src[65], uint8_t dest[25]) {
+bool BitcoinPublicKeyToAddress(const uint8_t src[65], uint8_t dest[25]) {
   // src[0] equals to 0x04 means an uncompressed ECDSA publick key, see
   // https://bitcoin.org/en/developer-guide#public-key-formats.
   if (src[0] == 0x04) {
@@ -29,7 +29,7 @@ bool PublicKeyToAddress(const uint8_t src[65], uint8_t dest[25]) {
   return false;
 }
 
-bool CompressedPublicKeyToAddress(const uint8_t src[33], uint8_t dest[25]) {
+bool BitcoinCompressedPublicKeyToAddress(const uint8_t src[33], uint8_t dest[25]) {
   // src[0] equals to 0x02 / 0x03 means a compressed ECDSA
   // publick key, see
   // https://bitcoin.org/en/developer-guide#public-key-formats.
@@ -51,28 +51,28 @@ bool CompressedPublicKeyToAddress(const uint8_t src[33], uint8_t dest[25]) {
   return false;
 }
 
-bool PublicKeyToASCII(const uint8_t src[65], char* dest, uint32_t max_len) {
+bool BitcoinPublicKeyToASCII(const uint8_t src[65], char* dest, uint32_t max_len) {
   dest[0] = '\0';
   uint8_t hash[25];
-  if (PublicKeyToAddress(src, hash)) {
+  if (BitcoinPublicKeyToAddress(src, hash)) {
     EncodeBase58(hash, 25, true, dest, max_len);
     return true;
   }
   return false;
 }
 
-bool CompressedPublicKeyToASCII(const uint8_t src[33], char* dest,
+bool BitcoinCompressedPublicKeyToASCII(const uint8_t src[33], char* dest,
                                 uint32_t max_len) {
   dest[0] = '\0';
   uint8_t hash[25];
-  if (CompressedPublicKeyToAddress(src, hash)) {
+  if (BitcoinCompressedPublicKeyToAddress(src, hash)) {
     EncodeBase58(hash, 25, true, dest, max_len);
     return true;
   }
   return false;
 }
 
-bool ASCIIToAddress(const char* src, uint8_t dest[25]) {
+bool BitcoinASCIIToAddress(const char* src, uint8_t dest[25]) {
   uint32_t len = DecodeBase58(src, true, dest, 25);
   if (len == 25) {
     uint8_t checksum[32];
@@ -85,7 +85,7 @@ bool ASCIIToAddress(const char* src, uint8_t dest[25]) {
   return false;
 }
 
-void RIPEMD160ToAddress(const uint8_t src[20], uint8_t dest[25]) {
+void BitcoinRIPEMD160ToAddress(const uint8_t src[20], uint8_t dest[25]) {
   uint8_t hash[32];
   dest[0] = '\0';
   memcpy(dest + 1, src, 20);
@@ -96,11 +96,11 @@ void RIPEMD160ToAddress(const uint8_t src[20], uint8_t dest[25]) {
   dest[23] = hash[2];
   dest[24] = hash[3];
 }
-void RIPEMD160ToScriptAddress(const uint8_t src[20], uint8_t dest[25]) {
-  RIPEMD160ToAddress(src, dest);
+void BitcoinRIPEMD160ToScriptAddress(const uint8_t src[20], uint8_t dest[25]) {
+  BitcoinRIPEMD160ToAddress(src, dest);
 }
 
-bool AddressToASCII(const uint8_t src[25], char* dest, uint32_t max_len) {
+bool BitcoinAddressToASCII(const uint8_t src[25], char* dest, uint32_t max_len) {
   EncodeBase58(src, 25, true, dest, max_len);
   return true;
 }

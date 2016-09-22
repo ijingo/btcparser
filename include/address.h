@@ -24,26 +24,26 @@
 //
 #include <cstdint>
 // Concerts an ASCII Bitcoin address (Base58 encoded) into the 25 byte version.
-bool ASCIIToAddress(const char* src, uint8_t dest[25]);
+bool BitcoinASCIIToAddress(const char* src, uint8_t dest[25]);
 // Converts a 25 byte Bitcoin adress into the ASCII version (Base58).
 // char * dest is '\0' ended.
-bool AddressToASCII(const uint8_t src[25], char* dest, uint32_t max_len);
+bool BitcoinAddressToASCII(const uint8_t src[25], char* dest, uint32_t max_len);
 // Converts a full 65 byte ECDSA public key into ASCII version.
 // char * dest is '\0' ended.
-bool PublicKeyToASCII(const uint8_t src[65], char* dest, uint32_t max_len);
+bool BitcoinPublicKeyToASCII(const uint8_t src[65], char* dest, uint32_t max_len);
 // Converts a 33 byte compressed ECDSA public key into ASCII version.
-bool CompressedPublicKeyToASCII(const uint8_t src[33], char* dest,
+bool BitcoinCompressedPublicKeyToASCII(const uint8_t src[33], char* dest,
                                 uint32_t max_len);
 // Convert a full 65 byte ECDSA public key into the 25 byte version (with a 1
 // byte version header and 4 byte checksum at the end).
-bool PublicKeyToAddress(const uint8_t src[65], uint8_t dest[25]);
+bool BitcoinPublicKeyToAddress(const uint8_t src[65], uint8_t dest[25]);
 // Converts a 33 byte compressed ECDSA public key into the 25 byte version (with
 // a 1 byte version header and 4 byte checksum at the end).
-bool CompressedPublicKeyToAddress(const uint8_t src[33], uint8_t dest[25]);
+bool BitcoinCompressedPublicKeyToAddress(const uint8_t src[33], uint8_t dest[25]);
 
 // Add 1 byte header and 4 byte checksum to 20 byte RIPEMD160 address and get 25
 // byte address.
-void RIPEMD160ToAddress(const uint8_t src[20], uint8_t dest[25]);
-void RIPEMD160ToScriptAddress(const uint8_t src[20], uint8_t dest[25]);
+void BitcoinRIPEMD160ToAddress(const uint8_t src[20], uint8_t dest[25]);
+void BitcoinRIPEMD160ToScriptAddress(const uint8_t src[20], uint8_t dest[25]);
 
 #endif
