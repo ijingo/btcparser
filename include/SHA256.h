@@ -1,6 +1,5 @@
-#ifndef SHA256_H
-
-#define SHA256_H
+#ifndef _BTCPARSER_SHA256_H
+#define _BTCPARSER_SHA256_H
 
 // The header file defines a method to compute the SHA256 hash of a block of input data.
 //
@@ -11,7 +10,7 @@
 // The actual implementation of the method is a copy of the code written by Zilong Tan (eric.zltan@gmail.com) and released under MIT license
 //
 
-#include <stdint.h>	// Include stdint.h; available on most compilers but, if not, a copy is provided here for Microsoft Visual Studio
+#include <cstdint>	// Include stdint.h; available on most compilers but, if not, a copy is provided here for Microsoft Visual Studio
 
 void computeSHA256(const void *input,		// A pointer to the input data to have the SHA256 hash computed for it.
 				   uint32_t size,			// the length of the input data

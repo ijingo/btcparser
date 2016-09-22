@@ -1,8 +1,7 @@
-#ifndef RIPEMD160_H
+#ifndef _BTCPARSER_RIPEMD160_H
+#define _BTCPARSER_RIPEMD160_H
 
-#define RIPEMD160_H
-
-#include <stdint.h>	// Include stdint.h; available on most compilers but, if not, a copy is provided here for Microsoft Visual Studio
+#include <cstdint>	// Include stdint.h; available on most compilers but, if not, a copy is provided here for Microsoft Visual Studio
 
 // This code snippet computes the RIPMD160 hash for a block of input data.
 // RIPEMD stands for RACE Integrity Primitives Evaluation Message Digest
