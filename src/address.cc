@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <cstdint>
+
 #include "address.h"
 #include "base58.h"
 #include "CRC32.h"
@@ -16,7 +17,7 @@ bool BitcoinPublicKeyToAddress(const uint8_t src[65], uint8_t dest[25]) {
 
     computeSHA256(src, 65, hash);
     dest[0] = 0;
-    computeRIMPED160(hash, 32, dest + 1);
+    computeRIPEMD160(hash, 32, dest + 1);
     computeSHA256(dest, 21, hash);
     computeSHA256(hash, 32, hash);
     dest[21] = hash[0];
@@ -38,7 +39,7 @@ bool BitcoinCompressedPublicKeyToAddress(const uint8_t src[33], uint8_t dest[25]
 
     computeSHA256(src, 33, hash);
     dest[0] = 0;
-    computeRIMPED160(hash, 32, dest + 1);
+    computeRIPEMD160(hash, 32, dest + 1);
     computeSHA256(dest, 21, hash);
     computeSHA256(hash, 32, hash);
     dest[21] = hash[0];
